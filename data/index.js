@@ -8,8 +8,9 @@ module.exports = {
   personStrings: personStrings
 };
 
-for(i = 0; i < 7; i++) {
+for(i = 0; i < 17; i++) {
   fs.readFile(`./data/message_${i+1}.json`, (err, data) => {
+    console.log("HELL YEAH\n\n\n\n\n", i);
     if (err) {
       console.log('error reading data');
       console.log(err.message);
@@ -23,7 +24,14 @@ for(i = 0; i < 7; i++) {
           })
           person = personStrings[newLength-1];
         }
-        person.messages = obj.messages.filter( (msg) => msg.sender_name === person.name).map((msg) => msg.content);
+        if (person.messages) {
+          person.messages = [...person.messages, ...obj.messages.filter( (msg) => 
+            msg.content && msg.sender_name === person.name).map((msg) => msg.content)
+          ];
+        } else {
+          person.messages = obj.messages.filter( (msg) => msg.content && msg.sender_name === person.name).map((msg) => msg.content);
+        }
+        console.log(person.name, person.messages.length);
       })
     }
   });
