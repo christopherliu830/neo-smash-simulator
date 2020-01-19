@@ -25,7 +25,7 @@ exports.generateMessage = () => {
 };
 
 const parseData = () => {
-  data.personStrings.forEach((p) => {
+  data.forEach((p) => {
     console.log(p.name);
     let markov = new MarkovChain();
     simulators.push(markov);
