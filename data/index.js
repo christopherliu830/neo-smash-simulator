@@ -4,13 +4,10 @@ var participants = {};
 var messages;
 var personStrings = new Array();
 
-module.exports = {
-  personStrings: personStrings
-};
+module.exports = personStrings;
 
 for(i = 0; i < 17; i++) {
-  fs.readFile(`./data/message_${i+1}.json`, (err, data) => {
-    console.log("HELL YEAH\n\n\n\n\n", i);
+  fs.readFile(`./data/message_${i+1}.json`, 'utf-8', (err, data) => {
     if (err) {
       console.log('error reading data');
       console.log(err.message);
@@ -29,9 +26,8 @@ for(i = 0; i < 17; i++) {
             msg.content && msg.sender_name === person.name).map((msg) => msg.content)
           ];
         } else {
-          person.messages = obj.messages.filter( (msg) => msg.content && msg.sender_name === person.name).map((msg) => msg.content);
+          person.messages = obj.messages.filter( (msg) => msg.content != undefined && msg.sender_name === person.name).map((msg) => msg.content);
         }
-        console.log(person.name, person.messages.length);
       })
     }
   });

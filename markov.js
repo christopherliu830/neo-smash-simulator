@@ -3,17 +3,16 @@ const random = require('random');
 var data = require('./data');
 
 var init = false;
-
-simulators = new Array();
+var simulators = new Array();
 
 exports.generateMessage = () => {
   if (!init) {
     parseData();
     init = true;
   }
-  var num = random.int(min = 0, max = data.personStrings.length);
-  if (data.personStrings[num] != null) {
-    var person = data.personStrings[num];
+  let num = random.int(min = 0, max = data.length);
+  if (data[num] != null) {
+    var person = data[num];
     return {
       name: person.name, 
       message:simulators[num].process()//() => random.float(min=0, max=1) < 0.3).process()
@@ -25,7 +24,7 @@ exports.generateMessage = () => {
   }
 };
 
-var parseData = () => {
+const parseData = () => {
   data.personStrings.forEach((p) => {
     console.log(p.name);
     let markov = new MarkovChain();

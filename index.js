@@ -13,7 +13,7 @@ var discordBot = {
 app.listen(3000, () => console.log('listening on port' + 3000));
 
 app.get('/', (req, res) => {
-  res.status(200).send('Hello World!');
+  res.status(200).send('Hello Jacob Klonsky!');
 });
 
 app.get('/discordbot', (req, res) => {
